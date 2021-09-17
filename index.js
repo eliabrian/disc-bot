@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.LISTEN_PORT ? process.env.LISTEN_PORT : 3000;
 app.get('/', (req, res) => res.send('Babu bot!'));
 
 app.listen(port, () => console.log(`Listening at port ${port}`));
@@ -109,6 +109,7 @@ Client.on('message', async message => {
                 video_player(message.guild, queue_constructor.songs[0])
             } catch (err) {
                 queue.delete(message.guild.id)
+                console.timeLog(err)
                 message.channel.send('Ada error bang')
             }
         } else {
